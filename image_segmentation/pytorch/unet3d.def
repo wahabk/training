@@ -1,0 +1,14 @@
+Bootstrap: docker
+From: nvcr.io/nvidia/pytorch:21.10-py3
+# pytorch/pytorch:1.7.1-cuda11.0-cudnn8-runtime
+# nvcr.io/nvidia/pytorch:21.02-py3
+
+%files
+    requirements.txt /workspace/unet3d/requirements.txt
+
+%post
+    apt-get update
+    apt-get upgrade -y && apt-get install -y git vim gfortran
+
+    pip install --upgrade pip
+    pip install --disable-pip-version-check -r /workspace/unet3d/requirements.txt
