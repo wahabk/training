@@ -49,6 +49,8 @@ def train(flags, model, train_loader, val_loader, loss_fn, score_fn, device, cal
         model = torch.nn.parallel.DistributedDataParallel(model,
                                                           device_ids=[flags.local_rank],
                                                           output_device=flags.local_rank)
+    else:
+        model = torch.nn.DataParallel(model)
 
     is_successful = False
     diverged = False
